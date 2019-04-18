@@ -69,7 +69,7 @@ Leave this window open. Then open yet another terminal window and create a
 tunnel from your local machine to the raad2-gtx login node:
 
 ```
-$ ssh -L 8888:localhost:8888 dagodlo21@raad2-gtx.qatar.tamu.edu
+$ ssh -L 8888:localhost:8888 dagodlo21@raad2-gfx.qatar.tamu.edu
 ```
 
 Replace `dgodlo21` with your username 
