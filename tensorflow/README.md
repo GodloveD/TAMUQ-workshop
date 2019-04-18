@@ -10,7 +10,7 @@ program by using an existing container.
 
 ## building / pulling the container
 
-The definition file pulls the 1.13.1-gpu version of TensorFlow from Docker Hub.  
+The definition file pulls the 1.13.1-gpu version of TensorFlow from Docker Hub.
 You can build it like so:
 
 ```
@@ -45,7 +45,7 @@ download the handwritten digit data if you have not already obtained it.
 $ singularity exec tensorflow-1.13.1-gpu.simg \
     python models/tutorials/image/mnist/convolutional.py
 ```
-Note that raad2-gfx has been configured to always run with the option to 
+The raad2-gfx has been configured to always run with the option to 
 bind the NVIDIA driver into the container.  Otherwise it would be necessary to
 pass the `--nv` flag with `exec` command above.
 
