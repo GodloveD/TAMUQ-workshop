@@ -45,7 +45,6 @@ From: debian:9
     conda list
 
 %runscript 
-
     PORT=""
     if [ -n "$JUP_PORT" ]; then
       PORT="--port=${JUP_PORT}"
