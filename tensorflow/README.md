@@ -42,6 +42,8 @@ start training a model on the MNIST data set.  Note that this script will
 download the handwritten digit data if you have not already obtained it.
 
 ```
+$ sinteractive
+
 $ singularity exec tensorflow-1.13.1-gpu.simg \
     python models/tutorials/image/mnist/convolutional.py
 ```
