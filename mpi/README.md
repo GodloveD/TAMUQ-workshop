@@ -7,8 +7,8 @@ were all part of one single system.
 Singularity employs a "hybrid" MPI model allowing you to run MPI
 jobs more easily. The basic idea is that Singularity expects MPI
 to be present both inside and outside of the container.  When 
-you execute an container with MPI code, you will call `mpiexec`
-or a similar command outside of Singularity on the `singularity`
+you execute a container with MPI code, you will call `mpiexec`
+or a similar binary on the `singularity`
 command itself. The MPI process outside of the container will 
 then work in tandem with MPI inside the container and the 
 containerized MPI code to instantiate the job.  
@@ -17,7 +17,9 @@ Currently, Singularity on raad2 only supports Intel MPI and
 will only run on multiple CPUs within a single node. Since 
 Intel MPI is licensed, it is probably easier to bind mount
 it into the container at runtime rather than build a container in
-which it is pre-installed. As a general rule, the more highly 
+which it is pre-installed. 
+
+As a general rule, the more highly 
 optimized software is, the less portable. This rule extends well
 to MPI. Less optimized implementations such as OpenMPI tend to be 
 more portable, while highly optimized implementations such as 
@@ -25,7 +27,7 @@ Intel are less portable.
 
 ## building an MPI application 
 
-This example will use the (MPI Hello World)[http://mpitutorial.com/tutorials/mpi-hello-world/] 
+This example will use the [MPI Hello World](http://mpitutorial.com/tutorials/mpi-hello-world/)
 tutorial by Wes Kendall. 
 
 On raad2, first clone the git repo:
