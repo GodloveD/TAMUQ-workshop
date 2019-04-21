@@ -147,7 +147,7 @@ Hello world from processor nid00012, rank 38 out of 48 processors
 Hello world from processor nid00012, rank 40 out of 48 processors
 ```
 
-Please not that this is just a demo is not really intended to be a useful example.
+Please note that this is just a demo is not really intended to be a useful example.
 In this demo, an application was built on the host system, and then it was run 
 inside of a container by bind mounting the Intel MPI directory into the container.
 You may (rightly) wonder what is the point of the container in this example,
