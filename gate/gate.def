@@ -1,0 +1,28 @@
+Bootstrap: docker
+From: docker://opengatecollaboration/gate:8.2
+
+%environment
+    export G4LEVELGAMMADATA=/geant4/geant4.10.05-install/share/Geant4-10.5.0/data/PhotonEvaporation5.3
+    export MANPATH=/cern/root-install/man:
+    export G4LEDATA=/geant4/geant4.10.05-install/share/Geant4-10.5.0/data/G4EMLOW7.7
+    export LD_LIBRARY_PATH=/cern/root-install/lib:/geant4/geant4.10.05-install/lib64:$LD_LIBRARY_PATH
+    export G4NEUTRONHPDATA=/geant4/geant4.10.05-install/share/Geant4-10.5.0/data/G4NDL4.5
+    export LIBPATH=/cern/root-install/lib
+    export G4ENSDFSTATEDATA=/geant4/geant4.10.05-install/share/Geant4-10.5.0/data/G4ENSDFSTATE2.2
+    export G4RADIOACTIVEDATA=/geant4/geant4.10.05-install/share/Geant4-10.5.0/data/RadioactiveDecay5.3
+    export G4ABLADATA=/geant4/geant4.10.05-install/share/Geant4-10.5.0/data/G4ABLA3.1
+    export JUPYTER_PATH=/cern/root-install/etc/notebook
+    export PATH=/cern/root-install/bin:/geant4/geant4.10.05-install/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/gate/gate_8.2-install/bin
+    export G4PIIDATA=/geant4/geant4.10.05-install/share/Geant4-10.5.0/data/G4PII1.3
+    export G4PARTICLEXSDATA=/geant4/geant4.10.05-install/share/Geant4-10.5.0/data/G4PARTICLEXS1.1
+    export G4SAIDXSDATA=/geant4/geant4.10.05-install/share/Geant4-10.5.0/data/G4SAIDDATA2.0
+    export ROOTSYS=/cern/root-install
+    export G4REALSURFACEDATA=/geant4/geant4.10.05-install/share/Geant4-10.5.0/data/RealSurface2.1.1
+    export DYLD_LIBRARY_PATH=/cern/root-install/lib
+    export PYTHONPATH=/cern/root-install/lib
+    export SHLIB_PATH=/cern/root-install/lib
+    export CMAKE_PREFIX_PATH=/cern/root-install
+    export G4INCLDATA=/geant4/geant4.10.05-install/share/Geant4-10.5.0/data/G4INCL1.0
+
+%runscript
+    Gate "$@"
