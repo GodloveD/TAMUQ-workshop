@@ -1,43 +1,59 @@
 # MPI jobs
 
 Message Passing Interface (MPI) allows applications to run across 
-multiple CPUs (perhaps even across multiple nodes) as if they 
-were all part of one single system.
+multiple nodes as if they were all part of a single system.
 
-Singularity employs a "hybrid" MPI model allowing you to run MPI
+Singularity employs a "hybrid" MPI model, allowing you to run MPI
 jobs more easily. The basic idea is that Singularity expects MPI
 to be present both inside and outside of the container.  When 
 you execute a container with MPI code, you will call `mpiexec`
-or a similar binary on the `singularity`
+or a similar launcher on the `singularity`
 command itself. The MPI process outside of the container will 
 then work in tandem with MPI inside the container and the 
 containerized MPI code to instantiate the job.  
 
-Currently, Singularity on raad2 only supports Intel MPI. Since 
-Intel MPI is licensed, it is probably easier to bind mount
-it into the container at runtime rather than build a container in
-which it is pre-installed. 
+For now, we have tested Singularity on raad2 mostly with Intel MPI. 
+Since Intel MPI is licensed, it is probably easier to bind mount
+it into the container at runtime rather than to build a container in
+which it is pre-installed.
 
-As a general rule, the more highly 
-optimized software is, the less portable. This rule extends well
+As a general rule, the more highly optimized software is, the less 
+portable it is. This rule applies just as well
 to MPI. Less optimized implementations such as OpenMPI tend to be 
 more portable, while highly optimized implementations such as 
 Intel are less portable. 
 
-MPI application can be packaged in a container in multiple ways. We are discussing two possible configurations; 
+An MPI application can be packaged in a container in multiple ways. 
+The example we share here demonstrates the first approach, but the
+second approach is technically possible and is mentioned just for
+the sake of completeness.
 
-## Configuration 01
-Install OpenMpi/Mpich inside the container and compile your application using these libraries. Port this application on raad2 and inject Intel MPI or Cray MPI inside the container. This will make use of Host MPI libraries.
+First Approach 
 
-## Configuration 02
-Install complete MPI runtume inside the container. That could be Intel/OpenMpi/Cray MPI runtime. Build your code/application e.g. Lammps, Grommacs, Gaussian against this MPI inside the container. Port this container to raad2. This will not rely on host MPI libraries. 
+Install OpenMPI or MPICH inside your container and compile your 
+application using that library. Then, copy your container to raad2
+and bind mount the directory for either the Intel MPI library inside 
+the container.  Set the container environment variables such that 
+the application links to the library mounted from the outside.
+
+Second Approach
+
+Install the complete MPI runtime inside the container. This could be 
+Intel, OpenMPI, or MPICH. Build your application (e.g. Lammps, Grommacs,
+OpenFOAM, etc.) against this "internal" MPI.  Copy this container to 
+raad2.  Technically this containers could run without relying on the 
+host MPI libararies, although on raad2 that would require some system 
+re-configuration that is  currently being studied.
 
 ### Example
-Below example demonstrate the ability of dynamically linking MPI libraries on the run time i.e. First Configuration listed above. We have tested it for Intel MPI on raad2. Part of this example is referenced from Taylor Childers from ANL.
+
+The example below demonstrates the first approach. We have tested it 
+using Intel MPI on raad2.  Part of this example is referenced from 
+Taylor Childers from ANL.
 
 Step 1. Build a base centos image and install MPICH. <br>
-Step 2. Compile mpi application inside the container using container MPI libraries. <br>
-Step 3. Port the container on raad2 and link with host Intel MPI. <br>
+Step 2. Compile the MPI application inside the container using the container MPI library (i.e. MPICH). <br>
+Step 3. Copy the container to raad2 and configure the environment to link with host Intel MPI. <br>
 
 All the steps you want to perform in the container can be listed in a definition file or a recipe.
 
