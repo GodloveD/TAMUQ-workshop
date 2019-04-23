@@ -18,7 +18,7 @@ source ~/.bashrc
 ```
 ### Download a container from NGC
 ```
-singularity build lammps24Oct18.simg nvcr.io/hpc/lammps:24Oct2018
+singularity build lammps24Oct18.simg docker://nvcr.io/hpc/lammps:24Oct2018
 ```
 ### Submit batch job file to run your application in container
 
