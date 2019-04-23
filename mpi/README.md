@@ -54,7 +54,7 @@ scp mpiapp.simg username@raad2a.qatar.tamu.edu:~/
 scp submit-raad2-intel.sh username@raad2a.qatar.tamu.edu:~/
 ```
 
-Use the batch script "submit-raad2-intel.sh" to submit your job file.
+Login to raad2 and sse the batch script "submit-raad2-intel.sh" to submit your job file.
 
 ```
 user@raad2a:~> sbatch submit-raad2-intel.sh
