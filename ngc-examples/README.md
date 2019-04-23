@@ -10,9 +10,9 @@ To download container from NGC, users should have NGC account. You can register 
 ### Get your API key from NGC
 Open this link: https://ngc.nvidia.com/setup and click "Get API Key"
 ### Setup authentication from raad2 to NGC
-Add this information to your raad2 account to allow Singularity to authenticate to your NGC account
-echo "export SINGULARITY_DOCKER_USERNAME='\$oauthtoken'" >> ~/.bashrc
-echo "export SINGULARITY_DOCKER_PASSWORD=<api_key>" >> ~/.bashrc
+Add this information to your raad2 account to allow Singularity to authenticate to your NGC account <br>
+echo "export SINGULARITY_DOCKER_USERNAME='\$oauthtoken'" >> ~/.bashrc <br>
+echo "export SINGULARITY_DOCKER_PASSWORD=<api_key>" >> ~/.bashrc <br>
 source ~/.bashrc
 ### Download a container from NGC
 ```
