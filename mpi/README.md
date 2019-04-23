@@ -24,138 +24,38 @@ to MPI. Less optimized implementations such as OpenMPI tend to be
 more portable, while highly optimized implementations such as 
 Intel are less portable. 
 
-## Building an MPI application 
+In general we can think of packaging MPI application in containers using two configurations:
 
-This example will use the [MPI Hello World](http://mpitutorial.com/tutorials/mpi-hello-world/)
-tutorial by Wes Kendall. 
+## Configuration 01
+Install OpenMpi/Mpich inside the container and compile your application using these libraries. Port this application on raad2 and inject Intel MPI or Cray MPI inside the container. This will make use of Host MPI libraries.
 
-On raad2, first clone the git repo:
+## Configuration 02
+Install complete MPI runtume inside the container. That could be Intel/OpenMpi/Cray MPI runtime. Build your code/application e.g. Lammps, Grommacs, Gaussian against this MPI inside the container. Port this container to raad2. This will not rely on host MPI libraries. 
 
-```
-$ git clone https://github.com/wesleykendall/mpitutorial
-```
+### Example
+Below example demonstrate the ability of dynamically linking MPI libraries on the run time i.e. First Configuration listed above. We have tested it for Intel MPI on raad2. Part of this example is referenced from Taylor Childers from ANL.
 
-Then set the environment up to use the Intel MPI compiler:
+Step 1. Build a base centos image and install MPICH.
+Step 2. Compile mpi application inside the container using container MPI libraries.
+Step 3. Port the container on raad2 and link with host Intel MPI.
 
-```
-$ module unuse /lustre/sw/xc40ac/modulefiles
-$ module unload PrgEnv-cray
-$ module load PrgEnv-intel
-``` 
+### Build a container from definition file (Recipe for the container)
 
-Now we are ready to compile the MPI Hello World example:
+All the steps you want to perform in the container can be listed in a definition file or a recipe. On your local resource, issue following;
 
 ```
-$ cd mpitutorial/tutorials/mpi-hello-world/code
-$ export MPICC=`which mpiicc`
-$ make
-$ cp mpi_hello_world ~/
-$ cd ~
+cd ~/TAMUQ-workshop/mpi
+singularity build --writable mpiapp.simg Singularity_mpich33.def
 ```
 
-## run the job from within a container
-
-First you need to obtain a container. In many cases, you would 
-build a container with MPI inside of it and then compile the app
-within the container itself. But for this example we will actually
-be using Intel MPI from the host system through a bind mount, so
-we can just grab a vanilla CentOS container. 
+Use the batch script "submit-raad2-intel.sh" to submit your job file.
 
 ```
-$ singularity pull docker://centos
-```
-
-Then create a batch script:
-
-```sh
-#!/bin/bash
-#SBATCH -J mpi_tester
-#SBATCH -p express
-#SBATCH --qos ex
-#SBATCH --time=00:05:00
-#SBATCH -N 2
-#SBATCH --ntasks-per-node=24
-#SBATCH --hint=nomultithread
-
-module unuse /lustre/sw/xc40ac/modulefiles
-module unload PrgEnv-cray
-module load PrgEnv-intel
-
-export SINGULARITY_BINDPATH=/opt/intel
-
-srun -n 48 --mpi=pmi2 singularity exec  ~/centos.simg ~/mpi_hello_world
-```
-
-Save the batch file with the name `sing.job`.  Then submit the job
-with `sbatch`. 
-
-```
-$ sbatch sing.job
+sbatch submit-raad2-.sh
 ```
 
 The output should look like so:
 
 ```
-dagodlo21@raad2b:~> cat slurm-4561569.out
-Hello world from processor nid00008, rank 1 out of 48 processors
-Hello world from processor nid00012, rank 25 out of 48 processors
-Hello world from processor nid00008, rank 7 out of 48 processors
-Hello world from processor nid00008, rank 13 out of 48 processors
-Hello world from processor nid00008, rank 18 out of 48 processors
-Hello world from processor nid00008, rank 19 out of 48 processors
-Hello world from processor nid00008, rank 21 out of 48 processors
-Hello world from processor nid00008, rank 0 out of 48 processors
-Hello world from processor nid00008, rank 2 out of 48 processors
-Hello world from processor nid00008, rank 3 out of 48 processors
-Hello world from processor nid00008, rank 4 out of 48 processors
-Hello world from processor nid00008, rank 5 out of 48 processors
-Hello world from processor nid00008, rank 6 out of 48 processors
-Hello world from processor nid00008, rank 8 out of 48 processors
-Hello world from processor nid00008, rank 9 out of 48 processors
-Hello world from processor nid00008, rank 10 out of 48 processors
-Hello world from processor nid00008, rank 11 out of 48 processors
-Hello world from processor nid00008, rank 12 out of 48 processors
-Hello world from processor nid00008, rank 14 out of 48 processors
-Hello world from processor nid00008, rank 15 out of 48 processors
-Hello world from processor nid00008, rank 16 out of 48 processors
-Hello world from processor nid00008, rank 17 out of 48 processors
-Hello world from processor nid00008, rank 20 out of 48 processors
-Hello world from processor nid00008, rank 22 out of 48 processors
-Hello world from processor nid00008, rank 23 out of 48 processors
-Hello world from processor nid00012, rank 30 out of 48 processors
-Hello world from processor nid00012, rank 46 out of 48 processors
-Hello world from processor nid00012, rank 47 out of 48 processors
-Hello world from processor nid00012, rank 24 out of 48 processors
-Hello world from processor nid00012, rank 26 out of 48 processors
-Hello world from processor nid00012, rank 27 out of 48 processors
-Hello world from processor nid00012, rank 28 out of 48 processors
-Hello world from processor nid00012, rank 29 out of 48 processors
-Hello world from processor nid00012, rank 31 out of 48 processors
-Hello world from processor nid00012, rank 32 out of 48 processors
-Hello world from processor nid00012, rank 33 out of 48 processors
-Hello world from processor nid00012, rank 34 out of 48 processors
-Hello world from processor nid00012, rank 35 out of 48 processors
-Hello world from processor nid00012, rank 36 out of 48 processors
-Hello world from processor nid00012, rank 37 out of 48 processors
-Hello world from processor nid00012, rank 39 out of 48 processors
-Hello world from processor nid00012, rank 41 out of 48 processors
-Hello world from processor nid00012, rank 42 out of 48 processors
-Hello world from processor nid00012, rank 43 out of 48 processors
-Hello world from processor nid00012, rank 44 out of 48 processors
-Hello world from processor nid00012, rank 45 out of 48 processors
-Hello world from processor nid00012, rank 38 out of 48 processors
-Hello world from processor nid00012, rank 40 out of 48 processors
 ```
 
-Please note that this is just a demo is not really intended to be a useful example.
-In this demo, an application was built on the host system, and then it was run 
-inside of a container by bind mounting the Intel MPI directory into the container.
-You may (rightly) wonder what is the point of the container in this example,
-since you could easily run the hello world application without using a container
-at all.  
-
-In most real-world situations, both the MPI implementation and the compiled
-application would actually be installed into the container. But this was not 
-possible for the demo since Intel MPI is licensed and care must be taken not to
-distribute it. Hopefully, the demo still illustrates the basic ideas behind
-running a containerized MPI application.  
