@@ -24,7 +24,7 @@ to MPI. Less optimized implementations such as OpenMPI tend to be
 more portable, while highly optimized implementations such as 
 Intel are less portable. 
 
-## building an MPI application 
+## Building an MPI application 
 
 This example will use the [MPI Hello World](http://mpitutorial.com/tutorials/mpi-hello-world/)
 tutorial by Wes Kendall. 
