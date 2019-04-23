@@ -24,7 +24,7 @@ to MPI. Less optimized implementations such as OpenMPI tend to be
 more portable, while highly optimized implementations such as 
 Intel are less portable. 
 
-In general we can think of packaging MPI application in containers using two configurations:
+MPI application can be packaged in a container in multiple ways. We are discussing two possible configurations; 
 
 ## Configuration 01
 Install OpenMpi/Mpich inside the container and compile your application using these libraries. Port this application on raad2 and inject Intel MPI or Cray MPI inside the container. This will make use of Host MPI libraries.
@@ -39,7 +39,9 @@ Step 1. Build a base centos image and install MPICH. <br>
 Step 2. Compile mpi application inside the container using container MPI libraries. <br>
 Step 3. Port the container on raad2 and link with host Intel MPI. <br>
 
-All the steps you want to perform in the container can be listed in a definition file or a recipe. On your local resource, issue following;
+All the steps you want to perform in the container can be listed in a definition file or a recipe.
+
+On your local resource where you have sudo access, issue following;
 
 ```
 cd ~/TAMUQ-workshop/mpi
