@@ -8,7 +8,7 @@
 #SBATCH --ntasks=48
 #SBATCH --hint=nomultithread
 
-CONTAINER="mpich.simg"
+CONTAINER="mpiapp.simg"
 
 module unuse /lustre/sw/xc40ac/modulefiles
 module switch PrgEnv-cray PrgEnv-intel
