@@ -48,10 +48,16 @@ cd ~/TAMUQ-workshop/mpi
 singularity build --writable mpiapp.simg Singularity_mpich33.def
 ```
 
-Use the batch script "submit-raad2-intel.sh" to submit your job file.
+Copy the container and submission script to raad2
+```
+scp mpiapp.simg username@raad2a.qatar.tamu.edu:~/
+scp submit-raad2-intel.sh username@raad2a.qatar.tamu.edu:~/
+```
+
+Use the batch script "submit-raad2-intel.sh" to submit your job file. You can cop
 
 ```
-sbatch submit-raad2-.sh
+sbatch submit-raad2-intel.sh
 ```
 
 The output should look like so:
