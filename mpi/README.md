@@ -63,5 +63,32 @@ sbatch submit-raad2-intel.sh
 The output should look like so:
 
 ```
+worker nid00022 1 of 48
+worker nid00022 5 of 48
+worker nid00239 24 of 48
+worker nid00022 12 of 48
+worker nid00239 28 of 48
+worker nid00022 13 of 48
+.
+.
+.
+pi is approximately 3.1417259869152536, Error is 0.0001333333254605
+
+###Listing Dynamic Dependencies###
+        linux-vdso.so.1 =>  (0x00002aaaaaad0000)
+        libmpi.so.12 => /opt/intel/compilers_and_libraries_2017.1.132/linux/mpi/intel64/lib/libmpi.so.12 (0x00002aaaaaccf000)
+        libc.so.6 => /lib64/libc.so.6 (0x00002aaaab9e6000)
+        librt.so.1 => /lib64/librt.so.1 (0x00002aaaabdb3000)
+        libdl.so.2 => /lib64/libdl.so.2 (0x00002aaaabfbb000)
+        libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x00002aaaac1bf000)
+        /lib64/ld-linux-x86-64.so.2 (0x00002aaaaaaab000)
+        libpthread.so.0 => /lib64/libpthread.so.0 (0x00002aaaac3d5000)
+.
+.
+.
 ```
+This job ran on 02 nodes nid00022 and nid00239 and compute value of pi. At the end it listed the dynamic depencies of the executable to verify that its linking to host Intel MPI.
+
+
+
 
