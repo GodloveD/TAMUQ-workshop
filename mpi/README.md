@@ -87,7 +87,7 @@ pi is approximately 3.1417259869152536, Error is 0.0001333333254605
 .
 .
 ```
-This job ran on 02 nodes nid00022 and nid00239 and compute value of pi. At the end it listed the dynamic depencies of the executable to verify that its linking to host Intel MPI.
+This job ran on 02 nodes nid00022 and nid00239 and computed value of pi. At the end it listed the dynamic depencies of the executable to verify that its linking to host Intel MPI.
 
 
 
