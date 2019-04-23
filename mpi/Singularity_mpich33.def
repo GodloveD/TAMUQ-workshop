@@ -31,6 +31,9 @@ From: centos
    env | sort
    cd /mpitestapp
    mpicc -o pi -fPIC pi.c
+   echo "ldd /mpitestapp/pi" >> show_link.sh
+   chmod +x /mpitestapp/show_linking.sh
 
 %runscript
+   /mpitestapp/show_linking.sh
    /mpitestapp/pi
