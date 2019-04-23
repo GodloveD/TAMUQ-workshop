@@ -1,8 +1,8 @@
 #!/bin/bash
 #!/bin/bash
 #SBATCH -J demo
-#SBATCH -p l_long
-#SBATCH --qos=ll
+#SBATCH –qos=ll
+#SBATCH –p l_long
 #SBATCH --time=01:00:00
 #SBATCH -N 2
 #SBATCH --ntasks=48
