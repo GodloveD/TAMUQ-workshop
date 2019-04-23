@@ -54,15 +54,19 @@ scp mpiapp.simg username@raad2a.qatar.tamu.edu:~/
 scp submit-raad2-intel.sh username@raad2a.qatar.tamu.edu:~/
 ```
 
-Use the batch script "submit-raad2-intel.sh" to submit your job file. You can cop
+Use the batch script "submit-raad2-intel.sh" to submit your job file.
 
 ```
-sbatch submit-raad2-intel.sh
-```
-
-The output should look like so:
+user@raad2a:~> sbatch submit-raad2-intel.sh
+Submitted batch job <jid>
 
 ```
+
+Inspect the output and it should look like below;
+
+```
+user@raad2a:~> more slurm-jid.out
+
 worker nid00022 1 of 48
 worker nid00022 5 of 48
 worker nid00239 24 of 48
