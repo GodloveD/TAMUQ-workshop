@@ -35,11 +35,9 @@ Install complete MPI runtume inside the container. That could be Intel/OpenMpi/C
 ### Example
 Below example demonstrate the ability of dynamically linking MPI libraries on the run time i.e. First Configuration listed above. We have tested it for Intel MPI on raad2. Part of this example is referenced from Taylor Childers from ANL.
 
-Step 1. Build a base centos image and install MPICH.
+Step 1. Build a base centos image and install MPICH. <br>
 Step 2. Compile mpi application inside the container using container MPI libraries.
 Step 3. Port the container on raad2 and link with host Intel MPI.
-
-### Build a container from definition file (Recipe for the container)
 
 All the steps you want to perform in the container can be listed in a definition file or a recipe. On your local resource, issue following;
 
