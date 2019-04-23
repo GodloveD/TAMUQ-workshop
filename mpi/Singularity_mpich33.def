@@ -36,5 +36,5 @@ From: centos
    chmod +x /mpitestapp/show_linking.sh
 
 %runscript
-   /mpitestapp/show_linking.sh
    /mpitestapp/pi
+   /mpitestapp/show_linking.sh
