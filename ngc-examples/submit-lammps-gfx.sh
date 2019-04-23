@@ -14,7 +14,7 @@ wget -c https://lammps.sandia.gov/inputs/in.lj.txt
 INPUT="-var x 4 -var y 4 -var z 8 -in /host_pwd/in.lj.txt"
 
 # singularity alias
-SIMG="$(pwd)/lammps24Oct2018.simg"
+SIMG="$(pwd)/lammps24Oct18.simg"
 SINGULARITY="singularity run --nv -B ${PWD}:/host_pwd ${SIMG}"
 
 # lmp alias, assumes 1 slurm process per GPU
